@@ -19,7 +19,7 @@
                 "{story summary} - Short 2-3 words summary about what the branch contains",
                 "    This can contain digits, lowercase alphabets, dash.",
                 "",
-                "Example: 111504508-ft-resources-rest-endpoints  "
+                "Example: 111504508-ft-resources-rest-endpoints "
             ]
         }
     }
