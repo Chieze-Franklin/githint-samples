@@ -45,7 +45,7 @@
             ],
             "message": [
                 "Any line of the commit message cannot be longer than 100 characters!",
-                "This allows the message to be easier to read on github as well as in various git tools."
+                "This allows the message to be easier to read on github as well as in various git tools. "
             ]
         }
     }
