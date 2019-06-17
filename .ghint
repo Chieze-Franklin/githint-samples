@@ -3,13 +3,11 @@
         "detectPull": false
     },
     "checks": {
-        "Branch name format should be: {pivotal tracker id}-{story type}-{story summary}": {
-            "script": "/^[\\d]+-((ft-)|(ch-)|(bg-))[a-z0-9\\-]+$/.test(branch.name)",
+        "Branch name format should be: {story type}-{story summary}": {
+            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+$/.test(branch.name)",
             "message": [
                 "Branches should be named using the following format:",
-                "{pivotal tracker id}-{story type}-{story summary}",
-                "",
-                "{pivotal tracker id} - The Id of the pivotal tracker story associated with the commit.",
+                "{story type}-{story summary}",
                 "",
                 "{story type} - Indicates the context of the branch and should be one of:",
                 "    * bg = Bug",
