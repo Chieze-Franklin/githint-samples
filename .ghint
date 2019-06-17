@@ -19,6 +19,21 @@
                 "",
                 "Example: ft-good-branch"
             ]
+        },
+        "Commit message should consist of header, body, footer": {
+            "script": [
+                "const message = commit.commit.message.trim()",
+                "const messageParts = message.split('\\n')",
+                "const len = messageParts.length",
+                "if (len >= 5) {",
+                "   if (messageParts[0].trim() !== '' && messageParts[1].trim() === '' && messageParts[2].trim() !== ''",
+                "   && messageParts[len - 1].trim() !== '' && messageParts[len - 2].trim() === '' && messageParts[len - 3].trim() !== '') {",
+                "       return true;",
+                "   }",
+                "}",
+                "return false;"
+            ],
+            "message": "A commit message consists of a header, a body and a footer, separated by blank lines."
         }
     }
 }
