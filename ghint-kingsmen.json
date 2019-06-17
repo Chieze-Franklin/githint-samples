@@ -35,7 +35,7 @@
                 "}",
                 "return false;"
             ],
-            "message": "A commit message consists of a header, a body and a footer, separated by blank lines."
+            "message": "A commit message consists of a header, a body and a footer, separated by blank lines. "
         }
     }
 }
