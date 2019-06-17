@@ -1,0 +1,17 @@
+{
+    "options": {
+        "detectPull": false
+    },
+    "checks": {
+        "There should be a 'server' folder in root directory": "!!(tree.tree.find(t => t.path === 'server' && t.type === 'tree'))",
+        "There should be a 'server/config' folder": "!!(tree.tree.find(t => t.path === 'server/config' && t.type === 'tree'))",
+        "There should be a 'server/controllers' folder": "!!(tree.tree.find(t => t.path === 'server/controllers' && t.type === 'tree'))",
+        "There should be a 'server/fixtures' folder": "!!(tree.tree.find(t => t.path === 'server/fixtures' && t.type === 'tree'))",
+        "There should be a 'server/helpers' folder": "!!(tree.tree.find(t => t.path === 'server/helpers' && t.type === 'tree'))",
+        "There should be a 'server/middlewares' folder": "!!(tree.tree.find(t => t.path === 'server/middlewares' && t.type === 'tree'))",
+        "There should be a 'server/migrations' folder": "!!(tree.tree.find(t => t.path === 'server/migrations' && t.type === 'tree'))",
+        "There should be a 'server/models' folder": "!!(tree.tree.find(t => t.path === 'server/models' && t.type === 'tree'))",
+        "There should be a 'server/routes' folder": "!!(tree.tree.find(t => t.path === 'server/routes' && t.type === 'tree'))",
+        "There should be a 'server/tests' folder": "!!(tree.tree.find(t => t.path === 'server/tests' && t.type === 'tree'))"
+    }
+}
