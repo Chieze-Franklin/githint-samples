@@ -21,7 +21,7 @@
             ]
         },
         "Commit message should consist of header, body, footer": {
-            "skip": true,
+            "skip": false,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -69,6 +69,23 @@
                 "  * style (formatting, missing semi colons, …)",
                 "  * refactor",
                 "  * test (when adding missing tests)"
+            ]
+        },
+        "Commit message footer format should be: [(Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
+            "script": [
+                "const message = commit.commit.message.trim()",
+                "const messageLines = message.split('\\n')",
+                "if (messageLines.length >= 5) {",
+                "   const footer = messageLines[messageLines.length - 1]",
+                "   return /^\\[([Ff]inishes|[Ff]ixes|[Dd]elivers)\\s*#[0-9]+]$/.test(footer)",
+                "}",
+                "return false;"
+            ],
+            "message": [
+                "Finished, fixed or delivered stories should be listed in the footer",
+                "prefixed with 'Finishes', 'Fixes' , or 'Delivers' keyword like this:",
+                "",
+                "[Finishes #1234567]"
             ]
         }
     }
