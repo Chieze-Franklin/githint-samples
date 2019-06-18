@@ -85,7 +85,7 @@
                 "Finished, fixed or delivered stories should be listed in the footer",
                 "prefixed with 'Finishes', 'Fixes' , or 'Delivers' keyword like this:",
                 "",
-                "[(Finishes|Fixes|Delivers) #TRACKER_STORY_ID]"
+                "[Finishes #1234567]"
             ]
         }
     }
