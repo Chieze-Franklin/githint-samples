@@ -21,7 +21,7 @@
             ]
         },
         "Commit message should consist of header, body, footer": {
-            "skip": true,
+            "skip": false,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
