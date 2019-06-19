@@ -12,6 +12,18 @@
         "There should be a 'server/migrations' folder": "!!(tree.tree.find(t => t.path === 'server/migrations' && t.type === 'tree'))",
         "There should be a 'server/models' folder": "!!(tree.tree.find(t => t.path === 'server/models' && t.type === 'tree'))",
         "There should be a 'server/routes' folder": "!!(tree.tree.find(t => t.path === 'server/routes' && t.type === 'tree'))",
-        "There should be a 'server/tests' folder": "!!(tree.tree.find(t => t.path === 'server/tests' && t.type === 'tree'))"
+        "There should be a 'server/tests' folder": "!!(tree.tree.find(t => t.path === 'server/tests' && t.type === 'tree'))",
+        "Branch name format should be: {story type}-{story summary}-{pivotal tracker id}": {
+            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]+$/.test(branch.name)",
+            "message": [
+                "Branches created should be named using the following format:",
+                "{story type}-{2-3 word summary}-{pivotal tracker id}",
+                "    * bg = Bug",
+                "    * ch = Chore",
+                "    * ft = Feature",
+                "",
+                "Example: ft-resources-rest-endpoints-111504508"
+            ]
+        }
     }
 }
