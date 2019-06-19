@@ -1,24 +1,25 @@
 {
     "options": {
-        "detectPull": true
+        "detectPull": false
     },
     "checks": {
-        "Branch name format should be: {story type}-{story summary}": {
-            "skip": true,
-            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+$/.test(branch.name)",
+        "Branch name format should be: {story type}-{story summary}-{pivotal tracker id}": {
+            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]+$/.test(branch.name)",
             "message": [
-                "Branches should be named using the following format:",
-                "{story type}-{story summary}",
+                "Branches created should be named using the following format:",
+                "{story type}-{2-3 word summary}-{pivotal tracker id}",
                 "",
                 "{story type} - Indicates the context of the branch and should be one of:",
                 "    * bg = Bug",
                 "    * ch = Chore",
                 "    * ft = Feature",
                 "",
-                "{story summary} - Short 2-3 words summary about what the branch contains",
+                "{2-3 word summary} - Short 2-3 words summary about what the branch contains",
                 "    This can contain digits, lowercase alphabets, dash.",
                 "",
-                "Example: ft-good-branch"
+                "{pivotal tracker id} - The Id of the pivotal tracker story associated with the commit.",
+                "",
+                "Example: ft-resources-rest-endpoints-111504508"
             ]
         },
         "Commit message should consist of header, body, footer": {
@@ -102,6 +103,7 @@
             ]
         },
         "PR description should contain relevant headings": {
+            "skip": true,
             "script": [
                 "const body = pull.body",
                 "return body.indexOf('#### What does this PR do?') > -1",
