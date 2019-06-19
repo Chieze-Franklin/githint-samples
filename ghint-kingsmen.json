@@ -1,6 +1,6 @@
 {
     "options": {
-        "detectPull": false
+        "detectPull": true
     },
     "checks": {
         "Branch name format should be: {pivotal tracker id}-{story type}-{story summary}": {
