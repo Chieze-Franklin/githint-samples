@@ -4,6 +4,7 @@
     },
     "checks": {
         "Branch name format should be: {story type}-{story summary}": {
+            "skip": true,
             "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+$/.test(branch.name)",
             "message": [
                 "Branches should be named using the following format:",
@@ -21,7 +22,7 @@
             ]
         },
         "Commit message should consist of header, body, footer": {
-            "skip": false,
+            "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -37,6 +38,7 @@
             "message": "A commit message consists of a header, a body and a footer, separated by blank lines."
         },
         "Commit message should not have lines longer than 100 characters": {
+            "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -48,6 +50,7 @@
             ]
         },
         "Commit message header format should be: {type}-[{pivotal tracker id}]: {subject}": {
+            "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -72,6 +75,7 @@
             ]
         },
         "Commit message footer format should be: [(Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
+            "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -89,6 +93,7 @@
             ]
         },
         "PR title format should be: #{pivotal tracker id} {story description}": {
+            "skip": true,
             "script": "/^#[0-9]+\\s*[\\w\\s-()]+$/.test(pull.title)",
             "message": [
                 "Example of a valid PR title:",
@@ -111,15 +116,13 @@
                 "The description of the PR should contain the following headings",
                 "and corresponding content in Markdown format.",
                 "",
-                "```",
-                "#### What does this PR do?",
-                "#### Description of Task to be completed?",
-                "#### How should this be manually tested?",
-                "#### Any background context you want to provide?",
-                "#### What are the relevant pivotal tracker stories?",
-                "#### Screenshots (if appropriate)",
-                "#### Questions",
-                "```"
+                "`#### What does this PR do?`",
+                "`#### Description of Task to be completed?`",
+                "`#### How should this be manually tested?`",
+                "`#### Any background context you want to provide?`",
+                "`#### What are the relevant pivotal tracker stories?`",
+                "`#### Screenshots (if appropriate)`",
+                "`#### Questions`"
             ]
         }
     }
