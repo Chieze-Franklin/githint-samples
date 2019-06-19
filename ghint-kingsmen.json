@@ -88,6 +88,14 @@
                 "",
                 "[Finishes #1234567]"
             ]
+        },
+        "PR title format should be: #{pivotal tracker id} {story description}": {
+            "script": "/^#[0-9]+\\s*[\\w\\s-()]+$/.test(pull.title)",
+            "message": [
+                "Example of a valid PR title:",
+                "",
+                "#11504508 Build out REST Endpoint for Resources (CRUD)"
+            ]
         }
     }
 }
