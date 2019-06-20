@@ -24,6 +24,57 @@
                 "",
                 "Example: ft-resources-rest-endpoints-111504508"
             ]
+        },
+        "Commit message should consist of header, body, footer": {
+            "script": [
+                "const message = commit.commit.message.trim()",
+                "const messageLines = message.split('\\n')",
+                "const len = messageLines.length",
+                "if (len >= 5) {",
+                "   if (messageLines[0].trim() !== '' && messageLines[1].trim() === '' && messageLines[2].trim() !== ''",
+                "   && messageLines[len - 1].trim() !== '' && messageLines[len - 2].trim() === '' && messageLines[len - 3].trim() !== '') {",
+                "       return true;",
+                "   }",
+                "}",
+                "return false;"
+            ],
+            "message": "A commit message consists of a header, a body and a footer, separated by blank lines."
+        },
+        "Commit message should not have lines longer than 100 characters": {
+            "script": [
+                "const message = commit.commit.message.trim()",
+                "const messageLines = message.split('\\n')",
+                "return !(messageLines.find(line => line.length > 100));"
+            ],
+            "message": [
+                "Any line of the commit message cannot be longer than 100 characters!",
+                "This allows the message to be easier to read on github as well as in various git tools."
+            ]
+        },
+        "Commit message header format should be: {type}({scope}): {subject}": {
+            "script": [
+                "const message = commit.commit.message.trim()",
+                "const messageLines = message.split('\\n')",
+                "if (messageLines.length >= 5) {",
+                "   const header = messageLines[0]",
+                "   return /^(bug|chore|docs|feat|fix|refactor|release|style|test)\\([\\w\\s-]+\\):\\s*.+$/.test(header)",
+                "}",
+                "return false;"
+            ],
+            "message": [
+                "The message header is a single line that contains succinct description",
+                "of the change containing a type, a scope and a subject.",
+                "",
+                "This describes the kind of change that this commit is providing.",
+                "  * feat (feature)",
+                "  * fix (bug fix)",
+                "  * chore (maintain)",
+                "  * docs (documentation)",
+                "  * style (formatting, missing semi colons, …)",
+                "  * refactor",
+                "  * release",
+                "  * test"
+            ]
         }
     }
 }

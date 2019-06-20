@@ -54,13 +54,13 @@
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const header = messageLines[0]",
-                "   return /^(feat|fix|chore|docs|style|refactor|test)(-[?[0-9]+]?)?:\\s*.*$/.test(header)",
+                "   return /^(feat|fix|chore|docs|style|refactor|test)(-[?[0-9]+]?)?:\\s*.+$/.test(header)",
                 "}",
                 "return false;"
             ],
             "message": [
-                "The message header is a single line that contains succinct description",
-                "of the change containing a type, an optional scope and a subject.",
+                ".The message header is a single line that contains succinct description",
+                "of the change containing a type, an optional scope and a subject",
                 "",
                 "This describes the kind of change that this commit is providing.",
                 "  * feat (feature)",
