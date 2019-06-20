@@ -23,7 +23,6 @@
             ]
         },
         "Commit message should consist of header, body, footer": {
-            "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -50,14 +49,13 @@
                 "This allows the message to be easier to read on github as well as in various git tools."
             ]
         },
-        "Commit message header format should be: {type}-[{pivotal tracker id}]: {subject}": {
-            "skip": true,
+        "Commit message header format should be: {type}({scope}): {subject}": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const header = messageLines[0]",
-                "   return /^(feat|fix|chore|docs|style|refactor|test)(-[?[0-9]+]?)?:\\s*.*$/.test(header)",
+                "   return /^(bug|chore|docs|feat|fix|refactor|style|test)(\\([\\w\\s-]+\\))?:\\s*.+$/.test(header)",
                 "}",
                 "return false;"
             ],
