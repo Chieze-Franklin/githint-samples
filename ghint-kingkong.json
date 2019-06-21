@@ -1,6 +1,6 @@
 {
     "options": {
-        "detectPull": false
+        "detectPull": true
     },
     "checks": {
         "There should be a 'server' folder in root directory": "!!(tree.tree.find(t => t.path === 'server' && t.type === 'tree'))",
@@ -74,6 +74,27 @@
                 "  * refactor",
                 "  * release",
                 "  * test"
+            ]
+        },
+        "Commit message footer format should be: [(Starts|Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
+            "skip": true,
+            "script": [
+                "const message = commit.commit.message.trim()",
+                "const messageLines = message.split('\\n')",
+                "if (messageLines.length >= 5) {",
+                "   const footer = messageLines[messageLines.length - 1]",
+                "   return /^\\[([Ss]tarts|[Ff]inishes|[Ff]ixes|[Dd]elivers|[Cc]hores)\\s*(#[0-9]+[,]?\\s*)+]$/.test(footer)",
+                "}",
+                "return false;"
+            ],
+            "message": [
+                "Finished, fixed or delivered stories should be listed in the footer",
+                "prefixed with 'Starts', 'Finishes', 'Fixes' , 'Delivers', or 'Chores' keyword like this:",
+                "",
+                "[Finishes #1234567]",
+                "",
+                "or in a case of multiple stories:",
+                "[Finishes #0001234, #0123456, #12345678]"
             ]
         }
     }
