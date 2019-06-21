@@ -38,7 +38,6 @@
             "message": "A commit message consists of a header, a body and a footer, separated by blank lines."
         },
         "Commit message should not have lines longer than 100 characters": {
-            "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -73,14 +72,14 @@
                 "  * test (when adding missing tests)"
             ]
         },
-        "Commit message footer format should be: [(Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
+        "Commit message footer format should be: [(Starts|Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
             "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const footer = messageLines[messageLines.length - 1]",
-                "   return /^\\[([Ff]inishes|[Ff]ixes|[Dd]elivers)?\\s*#[0-9]+]$/.test(footer)",
+                "   return /^\\[([Ss]tarts|[Ff]inishes|[Ff]ixes|[Dd]elivers)?\\s*#[0-9]+]$/.test(footer)",
                 "}",
                 "return false;"
             ],
