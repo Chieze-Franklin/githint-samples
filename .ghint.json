@@ -1,6 +1,6 @@
 {
     "options": {
-        "detectPull": false
+        "detectPull": true
     },
     "checks": {
         "Branch name format should be: {story type}-{story summary}-{pivotal tracker id}": {
@@ -73,7 +73,6 @@
             ]
         },
         "Commit message footer format should be: [(Starts|Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
-            "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -91,7 +90,6 @@
             ]
         },
         "PR title format should be: #{pivotal tracker id} {story description}": {
-            "skip": true,
             "script": "/^#[0-9]+\\s*[\\w\\s-()]+$/.test(pull.title)",
             "message": [
                 "Example of a valid PR title:",
@@ -100,7 +98,6 @@
             ]
         },
         "PR description should contain relevant headings": {
-            "skip": true,
             "script": [
                 "const body = pull.body",
                 "return body.indexOf('#### What does this PR do?') > -1",
