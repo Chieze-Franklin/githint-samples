@@ -97,29 +97,6 @@
                 "#11504508 Build out REST Endpoint for Resources (CRUD)"
             ]
         },
-        "PR description should contain relevant headings": {
-            "script": [
-                "const body = pull.body",
-                "return body.indexOf('#### What does this PR do?') > -1",
-                "       && body.indexOf('#### Description of task to be completed?') > -1",
-                "       && body.indexOf('#### How should this be manually tested?') > -1",
-                "       && body.indexOf('#### Any background context you want to provide?') > -1",
-                "       && body.indexOf('#### What are the relevant pivotal tracker stories?') > -1",
-                "       && body.indexOf('#### Screenshots (if appropriate)') > -1",
-                "       && body.indexOf('#### Questions') > -1"
-            ],
-            "message": [
-                "The description of the PR should contain the following headings",
-                "and corresponding content in Markdown format.",
-                "",
-                "`#### What does this PR do?`",
-                "`#### Description of task to be completed?`",
-                "`#### How should this be manually tested?`",
-                "`#### Any background context you want to provide?`",
-                "`#### What are the relevant pivotal tracker stories?`",
-                "`#### Screenshots (if appropriate)`",
-                "`#### Questions:`"
-            ]
-        }
+        "PR should contain label 'Ready To Be Reviewed'": "!!(pull.labels.find(l => l.name === 'Ready To Be Reviewed'))"
     }
 }
