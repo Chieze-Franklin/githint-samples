@@ -120,6 +120,9 @@
                 "`#### Screenshots (if appropriate)`",
                 "`#### Questions:`"
             ]
-        }
+        },
+
+        "PR should contain label 'review required'": "pull.labels.length === 1 && !!(pull.labels.find(l => l.name === 'review required'))",
+        "PR must have at least 2 approvals": "pull.reviews.filter(r => r.state === 'APPROVED').length >= 2"
     }
 }
