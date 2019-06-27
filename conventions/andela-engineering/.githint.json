@@ -6,12 +6,18 @@
         "File Naming": {
             "skip": true,
             "script": [
-                "const offendingFiles =",
-                "tree.tree.filter(t => !(/^([\\w-]+\\.){1,}[\\w-]+$/.test(t.path.substring(t.path.lastIndexOf('/') === -1 ? 0 : t.path.lastIndexOf('/')))))",
-                ".map(t => t.path)",
-                "throw new Error(",
-                "'The following file names do not follow our conventions:' + \\n + offendingFiles.join('\\n')",
-                ")"
+                "const offendingFiles = ",
+                "tree.tree.filter(t => t.type === 'blob')", 
+                ".filter(t => !(/^([\\w-]+\\.){1,}[\\w-]+$/.test(t.path.substring(t.path.lastIndexOf('/') + 1))))",
+                ".map(t => t.path);",
+                "if (offendingFiles.length > 0) {",
+                "return {",
+                "result: false,",
+                "message: 'Offending files:\\n' + offendingFiles.map(f => '  ' + f).join('\\n')",
+                "}",
+                "} else {",
+                "return true",
+                "}"
             ],
             "message": [
                 "We favour the `dot separated` + `kebab-case` convention.",
