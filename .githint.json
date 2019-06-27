@@ -3,7 +3,27 @@
         "detectPull": true
     },
     "checks": {
+        "Branch Naming (JIRA)": {
+            "script": "/^((bug\\/)|(story\\/)|(task\\/))[A-Z]+-[\\d]+[a-z0-9\\-]+$/.test(branch.name)",
+            "message": [
+                "Branches created should be named using the following format:",
+                "{issue type}/{Jira issue ID}-{issue summary}",
+                "",
+                "`issue type` - Indicates the context of the branch and should be one of:",
+                "    * bug",
+                "    * story",
+                "    * task",
+                "",
+                "`Jira issue ID` - The ID of the Jira issue associated with the commit",
+                "",
+                "`issue summary` - Short 2-3 words summary about what the branch contains",
+                "",
+                "Example:",
+                "    * `story/DT-1048-resources-rest-endpoints`"
+            ]
+        },
         "Branch name format should be: {story type}-{story summary}-[{pivotal tracker id}]": {
+            "skip": true,
             "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]*$/.test(branch.name)",
             "message": [
                 "Branches created should be named using the following format:",

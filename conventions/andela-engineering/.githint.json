@@ -4,7 +4,6 @@
     },
     "checks": {
         "File Naming": {
-            "skip": true,
             "script": [
                 "const offendingFiles = ",
                 "tree.tree.filter(t => t.type === 'blob')", 
@@ -13,7 +12,7 @@
                 "if (offendingFiles.length > 0) {",
                 "return {",
                 "result: false,",
-                "message: 'Offending files:\\n' + offendingFiles.map(f => '  ' + f).join('\\n')",
+                "message: 'Offending files:\\n' + offendingFiles.map(f => '    * ' + f).join('\\n')",
                 "}",
                 "} else {",
                 "return true",
@@ -31,27 +30,27 @@
                 "`file extension` - Denotes the extension of the file, eg, `js`, `ts`, `json`, etc",
                 "",
                 "Examples:",
-                "    `example-file.controller.ts`",
-                "    `example-file.service.interface.ts`"
+                "    * `example-file.controller.ts`",
+                "    * `example-file.service.interface.ts`"
             ]
         },
-        "Branch name format should be: {story type}-{story summary}-[{pivotal tracker id}]": {
-            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]*$/.test(branch.name)",
+        "Branch Naming (JIRA)": {
+            "script": "/^((bug\\/)|(story\\/)|(task\\/))[A-Z]+-[\\d]+[a-z0-9\\-]+$/.test(branch.name)",
             "message": [
                 "Branches created should be named using the following format:",
-                "{story type}-{2-3 word summary}-{pivotal tracker id}",
+                "{issue type}/{Jira issue ID}-{issue summary}",
                 "",
-                "{story type} - Indicates the context of the branch and should be one of:",
-                "    * bg = Bug",
-                "    * ch = Chore",
-                "    * ft = Feature",
+                "`issue type` - Indicates the context of the branch and should be one of:",
+                "    * bug",
+                "    * story",
+                "    * task",
                 "",
-                "{2-3 word summary} - Short 2-3 words summary about what the branch contains",
-                "    This can contain digits, lowercase alphabets, dash.",
+                "`Jira issue ID` - The ID of the Jira issue associated with the commit",
                 "",
-                "{pivotal tracker id} - The Id of the pivotal tracker story associated with the commit.",
+                "`issue summary` - Short 2-3 words summary about what the branch contains",
                 "",
-                "Example: ft-resources-rest-endpoints-111504508"
+                "Example:",
+                "    * `story/DT-1048-resources-rest-endpoints`"
             ]
         },
         "Commit message should consist of header, body, footer": {
