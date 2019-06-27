@@ -4,6 +4,7 @@
     },
     "checks": {
         "File Naming": {
+            "skip": true,
             "script": [
                 "const offendingFiles =",
                 "tree.tree.filter(t => !(/^([\\w-]+\\.){1,}[\\w-]+$/.test(t.path.substring(t.path.lastIndexOf('/') === -1 ? 0 : t.path.lastIndexOf('/')))))",
