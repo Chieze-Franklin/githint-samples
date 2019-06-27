@@ -3,7 +3,7 @@
         "detectPull": true
     },
     "checks": {
-        "Branch Naming (JIRA)": {
+        "Branch Naming (JIRA) ": {
             "script": "/^((bug\\/)|(story\\/)|(task\\/))[A-Z]+-[\\d]+[a-z0-9\\-]+$/.test(branch.name)",
             "message": [
                 "Branches created should be named using the following format:",
