@@ -3,6 +3,38 @@
         "detectPull": true
     },
     "checks": {
+        "File Naming": {
+            "skip": true,
+            "script": [
+                "const offendingFiles = ",
+                "tree.tree.filter(t => t.type === 'blob')", 
+                ".filter(t => !(/^([\\w-]+\\.){1,}[\\w-]+$/.test(t.path.substring(t.path.lastIndexOf('/') + 1))))",
+                ".map(t => t.path);",
+                "if (offendingFiles.length > 0) {",
+                "return {",
+                "result: false,",
+                "message: 'Offending files:\\n' + offendingFiles.map(f => '  ' + f).join('\\n')",
+                "}",
+                "} else {",
+                "return true",
+                "}"
+            ],
+            "message": [
+                "We favour the `dot separated` + `kebab-case` convention.",
+                "`{file title}.{file subtype}.{file type}.{file extension}`",
+                "",
+                "`file title` - Indicates what the file is about. Examples include `permission-type`, `employee`, `permission`, `role`, etc.",
+                "`file subtype` - The subtype of the file. The file may be an interface of a repository.",
+                "    A file can have more than one subtype, but they must all be separated by the period [.].",
+                "`file type` - Indicates the type of the file. A file should have only one type.",
+                "    These could be `controller`, `service`, `repository`, `interface`, etc. ",
+                "`file extension` - Denotes the extension of the file, eg, `js`, `ts`, `json`, etc",
+                "",
+                "Examples:",
+                "    `example-file.controller.ts`",
+                "    `example-file.service.interface.ts`"
+            ]
+        },
         "Branch name format should be: {story type}-{story summary}-[{pivotal tracker id}]": {
             "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]*$/.test(branch.name)",
             "message": [
@@ -121,6 +153,6 @@
                 "`#### Questions:`"
             ]
         },
-        "PR should contain label 'ready'": "pull.labels.length === 1 && !!(pull.labels.find(l => l.name === 'ready'))"
+        "PR should contain label 'Ready To Be Reviewed'": "pull.labels.length === 1 && !!(pull.labels.find(l => l.name === 'Ready To Be Reviewed'))"
     }
 }
