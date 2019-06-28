@@ -57,15 +57,17 @@
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const header = messageLines[0]",
-                "   return /^(bug|chore|docs|feat|fix|refactor|release|style|test)\\([\\w\\s-]+\\):\\s*.+$/.test(header)",
+                "   return /^(bug|chore|docs|feat|fix|refactor|release|style|test)\\([\\w\\s-]+\\):\\s*[a-z].+[^\\.]$/.test(header)",
                 "}",
                 "return false;"
             ],
             "message": [
-                "The message header is a single line that contains succinct description",
+                "The commit message header is a single line that contains succinct description",
                 "of the change containing a type, a scope and a subject.",
+                "The commit message header should be in the following format:",
+                "`{type}({scope}): {subject}`",
                 "",
-                "This describes the kind of change that this commit is providing.",
+                "`type` - This describes the kind of change that this commit is providing.",
                 "  * feat (feature)",
                 "  * fix (bug fix)",
                 "  * chore (maintain)",
@@ -73,7 +75,14 @@
                 "  * style (formatting, missing semi colons, …)",
                 "  * refactor",
                 "  * release",
-                "  * test"
+                "  * test",
+                "",
+                "`scope` - can be anything specifying place of the commit change",
+                "",
+                "`subject` - This is a very short description of the change.",
+                "  * use imperative, present tense: “change” not “changed” nor “changes”",
+                "  * don't capitalize first letter",
+                "  * no dot (.) at the end"
             ]
         },
         "Commit message footer format should be: [(Starts|Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {

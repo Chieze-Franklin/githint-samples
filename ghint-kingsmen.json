@@ -59,17 +59,19 @@
                 "return false;"
             ],
             "message": [
-                ".The message header is a single line that contains succinct description",
+                ".The commit message header is a single line that contains succinct description",
                 "of the change containing a type, an optional scope and a subject",
                 "",
-                "This describes the kind of change that this commit is providing.",
+                "`type` - This describes the kind of change that this commit is providing.",
                 "  * feat (feature)",
                 "  * fix (bug fix)",
                 "  * chore (maintain)",
                 "  * docs (documentation)",
                 "  * style (formatting, missing semi colons, …)",
                 "  * refactor",
-                "  * test (when adding missing tests)"
+                "  * test (when adding missing tests)",
+                "",
+                "`scope` - can be anything specifying place of the commit change"
             ]
         },
         "Commit message footer format should be: [(Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
