@@ -4,7 +4,6 @@
     },
     "checks": {
         "File Naming": {
-            "skip": true,
             "script": [
                 "const offendingFiles = ",
                 "tree.tree.filter(t => t.type === 'blob')", 
@@ -13,7 +12,7 @@
                 "if (offendingFiles.length > 0) {",
                 "return {",
                 "result: false,",
-                "message: 'Offending files:\\n' + offendingFiles.map(f => '  ' + f).join('\\n')",
+                "message: 'Offending files:\\n' + offendingFiles.map(f => '    * ' + f).join('\\n')",
                 "}",
                 "} else {",
                 "return true",
@@ -31,30 +30,30 @@
                 "`file extension` - Denotes the extension of the file, eg, `js`, `ts`, `json`, etc",
                 "",
                 "Examples:",
-                "    `example-file.controller.ts`",
-                "    `example-file.service.interface.ts`"
+                "    * `example-file.controller.ts`",
+                "    * `example-file.service.interface.ts`"
             ]
         },
-        "Branch name format should be: {story type}-{story summary}-[{pivotal tracker id}]": {
-            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]*$/.test(branch.name)",
+        "Branch Naming": {
+            "script": "/^((bug\\/)|(story\\/)|(task\\/))[A-Z]+-[\\d]+[a-z0-9\\-]+$/.test(branch.name)",
             "message": [
                 "Branches created should be named using the following format:",
-                "{story type}-{2-3 word summary}-{pivotal tracker id}",
+                "`{issue type}/{Jira issue ID}-{issue summary}`",
                 "",
-                "{story type} - Indicates the context of the branch and should be one of:",
-                "    * bg = Bug",
-                "    * ch = Chore",
-                "    * ft = Feature",
+                "`issue type` - Indicates the context of the branch and should be one of:",
+                "    * bug",
+                "    * story",
+                "    * task",
                 "",
-                "{2-3 word summary} - Short 2-3 words summary about what the branch contains",
-                "    This can contain digits, lowercase alphabets, dash.",
+                "`Jira issue ID` - The ID of the Jira issue associated with the commit",
                 "",
-                "{pivotal tracker id} - The Id of the pivotal tracker story associated with the commit.",
+                "`issue summary` - Short 2-3 words summary about what the branch contains",
                 "",
-                "Example: ft-resources-rest-endpoints-111504508"
+                "Example:",
+                "    * `story/DT-1048-resources-rest-endpoints`"
             ]
         },
-        "Commit message should consist of header, body, footer": {
+        "Commit Message": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -69,7 +68,7 @@
             ],
             "message": "A commit message consists of a header, a body and a footer, separated by blank lines."
         },
-        "Commit message should not have lines longer than 100 characters": {
+        "Commit Message Lines": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -80,28 +79,41 @@
                 "This allows the message to be easier to read on github as well as in various git tools."
             ]
         },
-        "Commit message header format should be: {type}({scope}): {subject}": {
+        "Commit Message Header": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const header = messageLines[0]",
-                "   return /^(bug|chore|docs|feat|fix|refactor|style|test)(\\([\\w\\s-]+\\))?:\\s*.+$/.test(header)",
+                "   return /^[A-Z]+-[\\d]+-(bug|docs|fix|refactor|story|style|task|test)(\\([\\w\\s-]+\\))?:\\s*[a-z].+[^\\.]$/.test(header)",
                 "}",
                 "return false;"
             ],
             "message": [
-                "The message header is a single line that contains succinct description",
-                "of the change containing a type, an optional scope and a subject.",
+                "The commit message header is a single line that contains succinct description",
+                "of the change containing an issue ID, a type, an optional scope and a subject.",
+                "The commit message header should be in the following format:",
+                "`{Jira issue ID}-{type}({scope}): {subject}`",
                 "",
-                "This describes the kind of change that this commit is providing.",
-                "  * feat (feature)",
+                "`issue ID` - this is to provide the advantage of immediately seeing the related Jira issue ",
+                "at the very top of the commit message. This becomes really useful when one does ",
+                "`git log --oneline` which doesn't show as far down to the footer of the commit message.",
+                "",
+                "`type` - This describes the kind of change that this commit is providing.",
+                "  * story (story)",
                 "  * fix (bug fix)",
-                "  * chore (maintain)",
                 "  * docs (documentation)",
                 "  * style (formatting, missing semi colons, …)",
                 "  * refactor",
-                "  * test (when adding missing tests)"
+                "  * task (maintain)",
+                "  * test (when adding missing tests)",
+                "",
+                "`scope` - cScope an be anything specifying place of the commit change.",
+                "",
+                "`subject` - This is a very short description of the change.",
+                "  * use imperative, present tense: “change” not “changed” nor “changes”",
+                "  * don't capitalize first letter",
+                "  * no dot (.) at the end"
             ]
         },
         "Commit message footer format should be: [(Starts|Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
