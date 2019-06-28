@@ -3,17 +3,7 @@
         "detectPull": true
     },
     "checks": {
-        "There should be a 'server' folder in root directory": "!!(tree.tree.find(t => t.path === 'server' && t.type === 'tree'))",
-        "There should be a 'server/config' folder": "!!(tree.tree.find(t => t.path === 'server/config' && t.type === 'tree'))",
-        "There should be a 'server/controllers' folder": "!!(tree.tree.find(t => t.path === 'server/controllers' && t.type === 'tree'))",
-        "There should be a 'server/fixtures' folder": "!!(tree.tree.find(t => t.path === 'server/fixtures' && t.type === 'tree'))",
-        "There should be a 'server/helpers' folder": "!!(tree.tree.find(t => t.path === 'server/helpers' && t.type === 'tree'))",
-        "There should be a 'server/middlewares' folder": "!!(tree.tree.find(t => t.path === 'server/middlewares' && t.type === 'tree'))",
-        "There should be a 'server/migrations' folder": "!!(tree.tree.find(t => t.path === 'server/migrations' && t.type === 'tree'))",
-        "There should be a 'server/models' folder": "!!(tree.tree.find(t => t.path === 'server/models' && t.type === 'tree'))",
-        "There should be a 'server/routes' folder": "!!(tree.tree.find(t => t.path === 'server/routes' && t.type === 'tree'))",
-        "There should be a 'server/tests' folder": "!!(tree.tree.find(t => t.path === 'server/tests' && t.type === 'tree'))",
-        "Branch name format should be: {story type}-{story summary}-{pivotal tracker id}": {
+        "Branch Name": {
             "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]+$/.test(branch.name)",
             "message": [
                 "Branches created should be named using the following format:",
@@ -25,7 +15,7 @@
                 "Example: ft-resources-rest-endpoints-111504508"
             ]
         },
-        "Commit message should consist of header, body, footer": {
+        "Commit Message": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -40,7 +30,7 @@
             ],
             "message": "A commit message consists of a header, a body and a footer, separated by blank lines."
         },
-        "Commit message should not have lines longer than 100 characters": {
+        "Commit Message Lines": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -51,7 +41,7 @@
                 "This allows the message to be easier to read on github as well as in various git tools."
             ]
         },
-        "Commit message header format should be: {type}({scope}): {subject}": {
+        "Commit Message Header": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -85,7 +75,7 @@
                 "  * no dot (.) at the end"
             ]
         },
-        "Commit message footer format should be: [(Starts|Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
+        "Commit Message Footer": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -105,15 +95,18 @@
                 "[Finishes #0001234, #0123456, #12345678]"
             ]
         },
-        "PR title format should be: #{pivotal tracker id} {story description}": {
+        "PR Title": {
             "script": "/^#[0-9]+\\s*[\\w\\s-()]+$/.test(pull.title)",
             "message": [
+                "The PR title should be in the following format:",
+                "`#{pivotal tracker id} {story description}`",
+                "",
                 "Example of a valid PR title:",
                 "",
                 "#11504508 Build out REST Endpoint for Resources (CRUD)"
             ]
         },
-        "PR description should contain relevant headings": {
+        "PR Description": {
             "script": [
                 "const body = pull.body",
                 "return body.indexOf('#### What does this PR do?') > -1",
@@ -137,7 +130,13 @@
                 "`#### Questions:`"
             ]
         },
-        "PR should contain label 'Ready To Be Reviewed'": "pull.labels.length === 1 && !!(pull.labels.find(l => l.name === 'Ready To Be Reviewed'))",
-        "PR must have at least 2 approvals": "pull.reviews.filter(r => r.state === 'APPROVED').length >= 2"
+        "PR 'Ready To Be Reviewed' Label": {
+            "script": "pull.labels.length === 1 && !!(pull.labels.find(l => l.name === 'Ready To Be Reviewed'))",
+            "message": "PR must have label 'Ready To Be Reviewed'"
+        },
+        "PR Approvals": {
+            "script": "pull.reviews.filter(r => r.state === 'APPROVED').length >= 2",
+            "message": "PR must have at least 2 approvals"
+        }
     }
 }

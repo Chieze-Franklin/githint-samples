@@ -3,7 +3,7 @@
         "detectPull": true
     },
     "checks": {
-        "File Naming": {
+        "File Name": {
             "script": [
                 "const offendingFiles = ",
                 "tree.tree.filter(t => t.type === 'blob')", 
@@ -34,7 +34,7 @@
                 "    * `example-file.service.interface.ts`"
             ]
         },
-        "Branch Naming": {
+        "Branch Name": {
             "script": "/^((bug\\/)|(story\\/)|(task\\/))[A-Z]+-[\\d]+[a-z0-9\\-]+$/.test(branch.name)",
             "message": [
                 "Branches created should be named using the following format:",
@@ -116,55 +116,57 @@
                 "  * no dot (.) at the end"
             ]
         },
-        "Commit message footer format should be: [(Starts|Finishes|Fixes|Delivers) #TRACKER_STORY_ID]": {
+        "Commit Message Footer": {
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const footer = messageLines[messageLines.length - 1]",
-                "   return /^\\[([Ss]tarts|[Ff]inishes|[Ff]ixes|[Dd]elivers)?\\s*#[0-9]+]$/.test(footer)",
+                "   return /^\\[([Ss]tarts|[Ff]inishes|[Ff]ixes|[Dd]elivers)\\s+[A-Z]+-[\\d]+]$/.test(footer)",
                 "}",
                 "return false;"
             ],
             "message": [
-                "Finished, fixed or delivered stories should be listed in the footer",
+                "Finished, fixed or delivered issue types should be listed in the footer",
                 "prefixed with 'Finishes', 'Fixes' , or 'Delivers' keyword like this:",
                 "",
-                "[Finishes #1234567]"
+                "[(Finishes|Fixes|Delivers) JIRA_ISSUE_ID]"
             ]
         },
-        "PR title format should be: #{pivotal tracker id} {story description}": {
-            "script": "/^#[0-9]+\\s*[\\w\\s-()]+$/.test(pull.title)",
+        "PR Title": {
+            "script": "/^[A-Z]+-[\\d]+\\s+[\\w\\s-()]+$/.test(pull.title)",
             "message": [
+                "The PR title should be in the following format:",
+                "`{jira issue id} {story description}`",
+                "",
                 "Example of a valid PR title:",
                 "",
-                "#11504508 Build out REST Endpoint for Resources (CRUD)"
+                "DT-213 Add Pre-commit Hooks"
             ]
         },
-        "PR description should contain relevant headings": {
+        "PR Description": {
             "script": [
                 "const body = pull.body",
-                "return body.indexOf('#### What does this PR do?') > -1",
-                "       && body.indexOf('#### Description of task to be completed?') > -1",
-                "       && body.indexOf('#### How should this be manually tested?') > -1",
-                "       && body.indexOf('#### Any background context you want to provide?') > -1",
-                "       && body.indexOf('#### What are the relevant pivotal tracker stories?') > -1",
-                "       && body.indexOf('#### Screenshots (if appropriate)') > -1",
-                "       && body.indexOf('#### Questions') > -1"
+                "return body.indexOf('#### Description') > -1",
+                "       && body.indexOf('#### Type of change') > -1",
+                "       && body.indexOf('#### How Has This Been Tested?') > -1",
+                "       && body.indexOf('#### Checklist:') > -1",
+                "       && body.indexOf('#### JIRA') > -1"
             ],
             "message": [
                 "The description of the PR should contain the following headings",
                 "and corresponding content in Markdown format.",
                 "",
-                "`#### What does this PR do?`",
-                "`#### Description of task to be completed?`",
-                "`#### How should this be manually tested?`",
-                "`#### Any background context you want to provide?`",
-                "`#### What are the relevant pivotal tracker stories?`",
-                "`#### Screenshots (if appropriate)`",
-                "`#### Questions:`"
+                "`#### Description`",
+                "`#### Type of change`",
+                "`#### How Has This Been Tested?`",
+                "`#### Checklist:`",
+                "`#### JIRA`"
             ]
         },
-        "PR should contain label 'Ready To Be Reviewed'": "pull.labels.length === 1 && !!(pull.labels.find(l => l.name === 'Ready To Be Reviewed'))"
+        "PR Approval": {
+            "script": "pull.reviews.filter(r => r.state === 'APPROVED').length >= 1",
+            "message": "PR must have at least 1 approval"
+        }
     }
 }
