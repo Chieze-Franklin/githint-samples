@@ -47,7 +47,7 @@
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const header = messageLines[0]",
-                "   return /^(bug|chore|docs|feat|fix|refactor|release|style|test)\\([\\w\\s-]+\\):\\s*[a-z].+[^\\.]$/.test(header)",
+                "   return /^(bug|chore|docs|feat|fix|refactor|release|style|test)\\([\\w\\s-.]+\\):\\s*[a-z].+[^\\.]$/.test(header)",
                 "}",
                 "return false;"
             ],
@@ -96,7 +96,7 @@
             ]
         },
         "PR Title": {
-            "script": "/^#[0-9]+\\s*[\\w\\s-()]+$/.test(pull.title)",
+            "script": "/^#[0-9]+\\s*[\\w\\s-().]+$/.test(pull.title)",
             "message": [
                 "The PR title should be in the following format:",
                 "`#{pivotal tracker id} {story description}`",

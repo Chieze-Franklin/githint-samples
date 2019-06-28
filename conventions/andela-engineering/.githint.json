@@ -85,7 +85,7 @@
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const header = messageLines[0]",
-                "   return /^[A-Z]+-[\\d]+-(bug|docs|fix|refactor|story|style|task|test)(\\([\\w\\s-]+\\))?:\\s*[a-z].+[^\\.]$/.test(header)",
+                "   return /^[A-Z]+-[\\d]+-(bug|docs|fix|refactor|story|style|task|test)(\\([\\w\\s-.]+\\))?:\\s*[a-z].+[^\\.]$/.test(header)",
                 "}",
                 "return false;"
             ],
@@ -134,7 +134,7 @@
             ]
         },
         "PR Title": {
-            "script": "/^[A-Z]+-[\\d]+\\s+[\\w\\s-()]+$/.test(pull.title)",
+            "script": "/^[A-Z]+-[\\d]+\\s+[\\w\\s-().]+$/.test(pull.title)",
             "message": [
                 "The PR title should be in the following format:",
                 "`{jira issue id} {story description}`",
