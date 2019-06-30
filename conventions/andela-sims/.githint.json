@@ -4,13 +4,21 @@
     },
     "checks": {
         "Branch Name": {
-            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]+$/.test(branch.name)",
+            "skip": true,
+            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]*$/.test(branch.name)",
             "message": [
                 "Branches created should be named using the following format:",
                 "{story type}-{2-3 word summary}-{pivotal tracker id}",
+                "",
+                "{story type} - Indicates the context of the branch and should be one of:",
                 "    * bg = Bug",
                 "    * ch = Chore",
                 "    * ft = Feature",
+                "",
+                "{2-3 word summary} - Short 2-3 words summary about what the branch contains",
+                "    This can contain digits, lowercase alphabets, dash.",
+                "",
+                "{pivotal tracker id} - The Id of the pivotal tracker story associated with the commit.",
                 "",
                 "Example: ft-resources-rest-endpoints-111504508"
             ]
@@ -47,13 +55,13 @@
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const header = messageLines[0]",
-                "   return /^(bug|chore|docs|feat|fix|refactor|release|style|test)\\([\\w\\s-.]+\\):\\s*[a-z].+[^\\.]$/.test(header)",
+                "   return /^(bug|chore|docs|feat|fix|refactor|style|test)(\\([\\w\\s-.]+\\))?:\\s*[a-z].+[^\\.]$/.test(header)",
                 "}",
                 "return false;"
             ],
             "message": [
                 "The commit message header is a single line that contains succinct description",
-                "of the change containing a type, a scope and a subject.",
+                "of the change containing a type, an optional scope and a subject.",
                 "The commit message header should be in the following format:",
                 "`{type}({scope}): {subject}`",
                 "",
@@ -64,8 +72,7 @@
                 "  * docs (documentation)",
                 "  * style (formatting, missing semi colons, …)",
                 "  * refactor",
-                "  * release",
-                "  * test",
+                "  * test (when adding missing tests)",
                 "",
                 "`scope` - can be anything specifying place of the commit change",
                 "",
@@ -81,22 +88,19 @@
                 "const messageLines = message.split('\\n')",
                 "if (messageLines.length >= 5) {",
                 "   const footer = messageLines[messageLines.length - 1]",
-                "   return /^\\[([Ss]tarts|[Ff]inishes|[Ff]ixes|[Dd]elivers|[Cc]hores)\\s*(#[0-9]+[,]?\\s*)+]$/.test(footer)",
+                "   return /^\\[([Ss]tarts|[Ff]inishes|[Ff]ixes|[Dd]elivers)?\\s*#[0-9]+]$/.test(footer)",
                 "}",
                 "return false;"
             ],
             "message": [
-                "Finished, fixed or delivered stories should be listed in the footer",
-                "prefixed with 'Starts', 'Finishes', 'Fixes' , 'Delivers', or 'Chores' keyword like this:",
+                "Started, finished, fixed or delivered stories should be listed in the footer",
+                "prefixed with 'Finishes', 'Fixes' , or 'Delivers' keyword like this:",
                 "",
-                "[Finishes #1234567]",
-                "",
-                "or in a case of multiple stories:",
-                "[Finishes #0001234, #0123456, #12345678]"
+                "[Finishes #1234567]"
             ]
         },
         "PR Title": {
-            "script": "/^#[0-9]+\\s*[\\w\\s-().]+$/.test(pull.title)",
+            "script": "/^#[0-9]+\\s+[\\w\\s-().]+$/.test(pull.title)",
             "message": [
                 "The PR title should be in the following format:",
                 "`#{pivotal tracker id} {story description}`",
@@ -130,9 +134,9 @@
                 "`#### Questions:`"
             ]
         },
-        "PR 'Ready To Be Reviewed' Label": {
-            "script": "pull.labels.length === 1 && !!(pull.labels.find(l => l.name === 'Ready To Be Reviewed'))",
-            "message": "PR must have label 'Ready To Be Reviewed'"
+        "PR 'ready' Label": {
+            "script": "pull.labels.length === 1 && !!(pull.labels.find(l => l.name === 'ready'))",
+            "message": "PR must have label 'ready'"
         },
         "PR Approvals": {
             "script": "pull.reviews.filter(r => r.state === 'APPROVED').length >= 2",
