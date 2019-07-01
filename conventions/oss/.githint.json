@@ -1,0 +1,57 @@
+{
+    "options": {
+        "detectPull": true
+    },
+    "checks": {
+        "Commit Message": {
+            "script": [
+                "const message = commit.commit.message.trim()",
+                "const messageLines = message.split('\\n')",
+                "const len = messageLines.length",
+                "if (len >= 5) {",
+                "   if (messageLines[0].trim() !== '' && messageLines[1].trim() === '' && messageLines[2].trim() !== ''",
+                "   && messageLines[len - 1].trim() !== '' && messageLines[len - 2].trim() === '' && messageLines[len - 3].trim() !== '') {",
+                "       return true;",
+                "   }",
+                "}",
+                "return false;"
+            ],
+            "message": "A commit message consists of a header, a body and a footer, separated by blank lines."
+        },
+        "Commit Message Lines": {
+            "script": [
+                "const message = commit.commit.message.trim()",
+                "const messageLines = message.split('\\n')",
+                "return !(messageLines.find(line => line.length > 100));"
+            ],
+            "message": [
+                "Any line of the commit message cannot be longer than 100 characters!",
+                "This allows the message to be easier to read on github as well as in various git tools."
+            ]
+        },
+        "PR Description": {
+            "script": [
+                "const body = pull.body",
+                "return body.indexOf('#### What does this PR do?') > -1",
+                "       && body.indexOf('#### Description of task to be completed?') > -1",
+                "       && body.indexOf('#### How should this be manually tested?') > -1",
+                "       && body.indexOf('#### Any background context you want to provide?') > -1",
+                "       && body.indexOf('#### What are the relevant pivotal tracker stories?') > -1",
+                "       && body.indexOf('#### Screenshots (if appropriate)') > -1",
+                "       && body.indexOf('#### Questions') > -1"
+            ],
+            "message": [
+                "The description of the PR should contain the following headings",
+                "and corresponding content in Markdown format.",
+                "",
+                "`#### What does this PR do?`",
+                "`#### Description of task to be completed?`",
+                "`#### How should this be manually tested?`",
+                "`#### Any background context you want to provide?`",
+                "`#### What are the relevant pivotal tracker stories?`",
+                "`#### Screenshots (if appropriate)`",
+                "`#### Questions:`"
+            ]
+        }
+    }
+}
