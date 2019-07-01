@@ -3,6 +3,13 @@
         "detectPull": true
     },
     "checks": {
+        "README": {
+            "skip": true,
+            "script": "!!(tree.tree.find(t => t.path === 'README.md'))",
+            "message": [
+                "Help people interested in this repository understand your project by adding a README."
+            ]
+        },
         "Branch Name": {
             "skip": true,
             "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]*$/.test(branch.name)",
