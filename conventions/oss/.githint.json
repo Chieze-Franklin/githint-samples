@@ -3,6 +3,13 @@
         "detectPull": true
     },
     "checks": {
+        "README": {
+            "skip": true,
+            "script": "!!(tree.tree.find(t => t.path === 'README.md'))",
+            "message": [
+                "Help people interested in this repository understand your project by adding a README."
+            ]
+        },
         "Commit Message": {
             "script": [
                 "const message = commit.commit.message.trim()",
