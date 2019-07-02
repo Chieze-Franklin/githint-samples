@@ -3,6 +3,13 @@
         "detectPull": true
     },
     "checks": {
+        ".gitignore": {
+            "skip": true,
+            "script": "!!(tree.tree.find(t => t.path === '.gitignore'))",
+            "message": [
+                "The repository must contain a .gitignore file"
+            ]
+        },
         "README": {
             "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'README.md'))",
