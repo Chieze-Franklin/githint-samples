@@ -10,6 +10,13 @@
                 "The repository must contain a .gitignore file"
             ]
         },
+        "LICENSE": {
+            "skip": true,
+            "script": "!!(tree.tree.find(t => t.path === 'LICENSE'))",
+            "message": [
+                "The repository must contain a LICENSE file"
+            ]
+        },
         "README": {
             "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'README.md'))",
