@@ -10,6 +10,13 @@
                 "The repository must contain a .gitignore file"
             ]
         },
+        "CHANGELOG": {
+            "skip": true,
+            "script": "!!(tree.tree.find(t => t.path === 'CHANGELOG' || t.path === 'CHANGELOG.md'))",
+            "message": [
+                "The repository must contain a CHANGELOG(.md) file"
+            ]
+        },
         "LICENSE": {
             "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'LICENSE'))",
