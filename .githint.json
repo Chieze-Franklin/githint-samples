@@ -17,6 +17,20 @@
                 "The repository must contain a CHANGELOG(.md) file"
             ]
         },
+        "CODE_OF_CONDUCT": {
+            "skip": true,
+            "script": "!!(tree.tree.find(t => t.path === 'CODE_OF_CONDUCT.md'))",
+            "message": [
+                "The repository must contain a CODE_OF_CONDUCT.md file"
+            ]
+        },
+        "CONTRIBUTING": {
+            "skip": true,
+            "script": "!!(tree.tree.find(t => t.path === 'CONTRIBUTING.md'))",
+            "message": [
+                "The repository must contain a CONTRIBUTING.md file"
+            ]
+        },
         "LICENSE": {
             "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'LICENSE'))",
