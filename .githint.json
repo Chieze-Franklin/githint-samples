@@ -116,6 +116,7 @@
             ]
         },
         "Commit Message Footer": {
+            "skip": true,
             "script": [
                 "const message = commit.commit.message.trim()",
                 "const messageLines = message.split('\\n')",
@@ -133,14 +134,14 @@
             ]
         },
         "PR Title": {
-            "script": "/^#[0-9]+\\s+[\\w\\s-().]+$/.test(pull.title)",
+            "script": "/^[\\w\\s-().]+$/.test(pull.title)",
             "message": [
                 "The PR title should be in the following format:",
-                "`#{pivotal tracker id} {story description}`",
+                "`{story description}`",
                 "",
                 "Example of a valid PR title:",
                 "",
-                "#11504508 Build out REST Endpoint for Resources (CRUD)"
+                "Build out REST Endpoint for Resources (CRUD)"
             ]
         },
         "PR Description": {
