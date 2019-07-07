@@ -4,53 +4,46 @@
     },
     "checks": {
         ".gitignore": {
-            "skip": true,
             "script": "!!(tree.tree.find(t => t.path === '.gitignore'))",
             "message": [
                 "The repository must contain a .gitignore file"
             ]
         },
         "CHANGELOG": {
-            "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'CHANGELOG' || t.path === 'CHANGELOG.md'))",
             "message": [
                 "The repository must contain a CHANGELOG(.md) file"
             ]
         },
         "CODE_OF_CONDUCT": {
-            "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'CODE_OF_CONDUCT.md'))",
             "message": [
                 "The repository must contain a CODE_OF_CONDUCT.md file"
             ]
         },
         "CONTRIBUTING": {
-            "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'CONTRIBUTING.md'))",
             "message": [
                 "The repository must contain a CONTRIBUTING.md file"
             ]
         },
         "LICENSE": {
-            "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'LICENSE'))",
             "message": [
                 "The repository must contain a LICENSE file"
             ]
         },
         "README": {
-            "skip": true,
             "script": "!!(tree.tree.find(t => t.path === 'README.md'))",
             "message": [
                 "Help people interested in this repository understand your project by adding a README."
             ]
         },
         "Branch Name": {
-            "skip": true,
-            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+[\\d]*$/.test(branch.name)",
+            "script": "/^((ft-)|(ch-)|(bg-))[a-z0-9\\-]+$/.test(branch.name)",
             "message": [
                 "Branches created should be named using the following format:",
-                "{story type}-{2-3 word summary}-{pivotal tracker id}",
+                "{story type}-{2-3 word summary}",
                 "",
                 "{story type} - Indicates the context of the branch and should be one of:",
                 "    * bg = Bug",
@@ -60,9 +53,7 @@
                 "{2-3 word summary} - Short 2-3 words summary about what the branch contains",
                 "    This can contain digits, lowercase alphabets, dash.",
                 "",
-                "{pivotal tracker id} - The Id of the pivotal tracker story associated with the commit.",
-                "",
-                "Example: ft-resources-rest-endpoints-111504508"
+                "Example: ft-resources-rest-endpoints"
             ]
         },
         "Commit Message": {
